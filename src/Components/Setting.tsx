@@ -38,14 +38,12 @@ export const Setting = (props: SettingType) => {
     return (
         <div className={s.wrapper}>
             <div className={s.display}>
-                <div className={s.value}><span>max value:  </span><input type={"number"} className={finalInputClassName}
-                                                                         value={props.max}
-                                                                         onChange={onChangeMaxInputHandler}/>
+                <div className={s.value}><span>max value:  </span>
+                    <input type={"number"} className={finalInputClassName} value={props.max}  onChange={onChangeMaxInputHandler}/>
                 </div>
-                <div className={s.value}><span>start value:  </span><input type={"number"}
-                                                                           className={finalInputClassName}
-                                                                           value={props.start}
-                                                                           onChange={onChangeStartInputHandler}/></div>
+                <div className={s.value}><span>start value:  </span>
+                    <input type={"number"} className={finalInputClassName} value={props.start}
+                     onChange={onChangeStartInputHandler}/></div>
             </div>
             <div className={s.butWrap}>
                 <SuperButton name={"Set"} callBack={() => {
