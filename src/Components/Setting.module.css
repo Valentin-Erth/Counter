@@ -1,0 +1,74 @@
+.wrapper {
+    /*margin-left: 200px;*/
+    /*margin-top: 30px;*/
+    width: 300px;
+    height: 130px;
+    background-color: #5c5700;
+
+}
+.display{
+    margin: 5px;
+    border:2px solid black;
+    border-radius: 3px;
+    height: 70px;
+    text-align: left;
+    font-size: 20px;
+}
+.butWrap {
+    display: flex;
+    justify-content: space-around;
+    border:2px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 5px;
+    height: 30px;
+}
+.redValue {
+    color: red;
+    font-size: 35px;
+}
+
+.button {
+    padding: 10px 34px;
+    margin-right: 5px;
+    /*width: 132px;*/
+    /*height: 30px;*/
+    border-radius: 3px;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+.button:hover{
+    background: #698cff;
+}
+.button:active{
+    background: grey;
+}
+.input{
+    width: 150px;
+    height: 20px;
+    color: #0059b3;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+.value{
+    padding: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+.errorInput {
+    width: 150px;
+    height: 20px;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding-left: 10px;
+    background: rgb(255, 68, 0);
+    opacity: 0.7
+}
+
+.errorInput:focus {
+    border: 1px solid red;
+}
+
+
