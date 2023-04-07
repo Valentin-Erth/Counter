@@ -1,7 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./Components/Counter";
 import {Setting} from "./Components/Setting";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./State/Store";
+import {
+    AddCounterAC,
+    OnChangeMaxInputAC,
+    OnChangeStartInputAC,
+    ResetCounterAC,
+    SetCounterAC
+} from "./State/ReducerCount";
 
  export type StateType={
      startValue: string,
@@ -10,58 +19,56 @@ import {Setting} from "./Components/Setting";
      error: string
  }
 function AppRedux() {
-    let maxValue = 1;
-    let startValue = 0;
-    const [state, setState] = useState<StateType>({
-        startValue: "0",
-        maxValue: "5",
-        count: 0,
-        error: 'Enter value'
-    })
-    // const [error, setError] = useState<string>('Enter value')
-    // const [max, setMax] = useState<string>('0')
-    // const [start, setStart] = useState<string>('0')
-
-    useEffect(() => {
-        let valueAsStringStart = localStorage.getItem("counterStart" || "0")
-        let valueAsStringMax = localStorage.getItem("counterMax" || "2")
-        if (valueAsStringStart && valueAsStringMax) {
-            let newValueStart = JSON.parse(valueAsStringStart)
-            setState({...state,startValue: newValueStart})
-            let newValueMax = JSON.parse(valueAsStringMax)
-            setState({...state,maxValue: newValueMax})
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem("counterStart", JSON.stringify(state.startValue))
-        localStorage.setItem("counterMax", JSON.stringify(state.maxValue))
-    }, [state.startValue, state.maxValue])
+     const stateCounter=useSelector<AppRootStateType,StateType>(state=>state.counter)
+    const dispatch=useDispatch()
+    // const [state, setState] = useState<StateType>({
+    //     startValue: "0",
+    //     maxValue: "5",
+    //     count: 0,
+    //     error: 'Enter value'
+    // })
+   // useEffect(() => {
+   //      let valueAsStringStart = localStorage.getItem("counterStart" || "0")
+   //      let valueAsStringMax = localStorage.getItem("counterMax" || "2")
+   //      if (valueAsStringStart && valueAsStringMax) {
+   //          let newValueStart = JSON.parse(valueAsStringStart)
+   //          setState({...state,startValue: newValueStart})
+   //          let newValueMax = JSON.parse(valueAsStringMax)
+   //          setState({...state,maxValue: newValueMax})
+   //      }
+   //  }, [])
+   //  useEffect(() => {
+   //      localStorage.setItem("counterStart", JSON.stringify(state.startValue))
+   //      localStorage.setItem("counterMax", JSON.stringify(state.maxValue))
+   //  }, [state.startValue, state.maxValue])
 
 
     const add = () => {
-        if (state.count < Number(state.maxValue)) {
-            setState({...state, count: state.count + 1})
-        }
+      dispatch(AddCounterAC())
     }
     const reset = () => {
-        setState({...state, count: Number(state.startValue)})
+        dispatch(ResetCounterAC())
     }
     const set = (s: string, m: string) => {
-         if (Number(s) === Number(m) || Number(m) < Number(s)||Number(m)<0|| Number(s)<0 ) {
-            setState({...state, error: "Incorrect value"})
-        } else {
-            setState({...state, startValue: s,maxValue: m, error: ""})
-            }
+      dispatch(SetCounterAC(s,m))
+    }
+    const onChangeMaxInput=(e:string)=>{
+        dispatch(OnChangeMaxInputAC(e))
+        // setState({...state, maxValue: e, error:"" })
+    }
+    const onChangeStartInput=(e:string)=>{
+        // setState({...state, startValue:e, error:"" })
+        dispatch(OnChangeStartInputAC(e))
     }
     return (
         <div className={"App"}>
-            <Setting set={set}
-                     max={state.maxValue} setState={setState} state={state}
-                     start={state.startValue} error={state.error}
+            <Setting set={set} onChangeMaxInput={onChangeMaxInput}
+                     onChangeStartInput={onChangeStartInput}
+                     max={stateCounter.maxValue}                      start={stateCounter.startValue} error={stateCounter.error}
                      />
-            <Counter count={state.count} add={add} reset={reset}
-                     maxValue={Number(state.maxValue)} startValue={Number(state.startValue)}
-                     error={state.error}/>
+            <Counter count={stateCounter.count} add={add} reset={reset}
+                     maxValue={Number(stateCounter.maxValue)} startValue={Number(stateCounter.startValue)}
+                     error={stateCounter.error}/>
 
         </div>
     );

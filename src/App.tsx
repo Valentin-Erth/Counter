@@ -55,16 +55,16 @@ function App() {
     }
     return (
         <div className={"App"}>
-            <Setting set={set}
-                     max={state.maxValue} setState={setState} state={state}
-                     start={state.startValue} error={state.error}
-                     />
-            <Counter count={state.count} add={add} reset={reset}
-                     maxValue={Number(state.maxValue)} startValue={Number(state.startValue)}
-                     error={state.error}/>
+            {/*<Setting set={set}*/}
+            {/*         max={state.maxValue} setState={setState} state={state}*/}
+            {/*         start={state.startValue} error={state.error}*/}
+            {/*         />*/}
+            {/*<Counter count={state.count} add={add} reset={reset}*/}
+            {/*         maxValue={Number(state.maxValue)} startValue={Number(state.startValue)}*/}
+            {/*         error={state.error}/>*/}
 
         </div>
     );
 }
 
-export default App;
+// export default App;
