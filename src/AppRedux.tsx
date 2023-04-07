@@ -9,7 +9,7 @@ import {Setting} from "./Components/Setting";
      count: number,
      error: string
  }
-function App() {
+function AppRedux() {
     let maxValue = 1;
     let startValue = 0;
     const [state, setState] = useState<StateType>({
@@ -67,4 +67,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppRedux;
