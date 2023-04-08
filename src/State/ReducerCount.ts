@@ -42,7 +42,7 @@ export const ReducerCount = (state: StateType = initialState, action: ActionType
         if (Number(action.s) === Number(action.m) || Number(action.m) < Number(action.s) || Number(action.m) < 0 || Number(action.s) < 0) {
             return {...state, error: "Incorrect value"}
         } else {
-            return {...state, startValue: action.s, maxValue: action.m, error: ""}
+            return {...state,count: Number(action.s) , startValue: action.s, maxValue: action.m, error: ""}
         }
     } else if (action.type === "CHANGE-MAX") {
         return {...state, maxValue: action.e, error: ""}
